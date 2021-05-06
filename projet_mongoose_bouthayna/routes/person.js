@@ -23,7 +23,7 @@ router.get( '/create-person', ( req, res ) => {
     } )
     person.save( function ( err, data ) {
         if ( err ) res.status( 400 ).json( err );
-        res.status( 200 ).json( { msg: "create-person with sucess", data } )
+        res.status( 200 ).json( { msg: "Success request: create-person", data } )
     } );
 } )
 
@@ -47,7 +47,7 @@ router.get( '/create-many-person', ( req, res ) => {
     } ];
     PersonModel.create( arrayOfPeople, function ( err, data ) {
         if ( err ) res.status( 400 ).json( err );
-        res.status( 200 ).json( { msg: "create-many-person with sucess", data } );
+        res.status( 200 ).json( { msg: "Success request: create-many-person", data } );
     } )
 } )
 
@@ -56,7 +56,7 @@ router.get( '/search-by-food/:food', ( req, res ) => {
     const food = req.params.food
     PersonModel.findOne( { favoriteFoods: food }, function ( err, data ) {
         if ( err ) res.status( 400 ).json( err );
-        res.status( 200 ).json( { msg: "succes search-by-food", data } );
+        res.status( 200 ).json( { msg: "Success request: search-by-food", data } );
     } );
 } )
 
@@ -65,7 +65,7 @@ router.get( '/search-by-id/:id', ( req, res ) => {
     const personId = req.params.id
     PersonModel.findById( { _id: personId }, function ( err, data ) {
         if ( err ) res.status( 400 ).json( err );
-        res.status( 200 ).json( { msg: "succes search-by-id", data } );
+        res.status( 200 ).json( { msg: "Success request: search-by-id", data } );
     } )
 } )
 
@@ -75,7 +75,7 @@ router.get( '/search-by-name/:name', ( req, res ) => {
     const personName = req.params.name
     PersonModel.find( { name: personName }, function ( err, data ) {
         if ( err ) res.status( 400 ).json( err );
-        res.status( 200 ).json( { msg: "succes search-by-name", data } );
+        res.status( 200 ).json( { msg: "Success request: succes search-by-name", data } );
     }
     )
 
@@ -87,11 +87,11 @@ router.put( '/search-and-modify-by-id/:id', ( req, res ) => {
         req.params.id
     PersonModel.findById( { _id: personId } )
         .then( ( data ) => {
-            data.favoriteFoods.push( 'hamburger' );
+            data.favoriteFoods.push( 'Hamburger' );
             data.markModified( 'favoriteFoods' );
             data.save();
             console.log( "data modified by id success" + data );
-            res.status( 200 ).json( { msg: "data modified by id with success", data } );
+            res.status( 200 ).json( { msg: "Success request: search-and-modify-by-id", data } );
         } )
         .catch( ( err ) => {
             res.status( 400 ).json( err );
@@ -106,7 +106,7 @@ router.put( '/find-one-and-update/:name', ( req, res ) => {
         new: true
     } ).then( ( data ) => {
         console.log( "find - one - and - update" + data );
-        res.status( 200 ).json( { msg: "data modified by name with success", data } );
+        res.status( 200 ).json( { msg: "Success request: find - one - and - update", data } );
     } )
         .catch( ( err ) => {
             res.status( 400 ).json( err );
@@ -119,7 +119,7 @@ router.delete( '/find-by-id-and-remove/:id', ( req, res ) => {
     PersonModel.findByIdAndRemove( { _id: personId } )
         .then( ( data ) => {
             console.log( "find-by-id-and-remove" + data );
-            res.status( 200 ).json( { msg: "data deleted by id with success", data } );
+            res.status( 200 ).json( { msg: "Success request: find-by-id-and-remove", data } );
         } )
         .catch( ( err ) => {
             res.status( 400 ).json( err );
@@ -131,8 +131,9 @@ router.delete( '/remove-name-marry', ( req, res ) => {
     PersonModel.remove( { name: 'Marry' } )
         .then( ( data ) => {
             console.log( "remove - name -marry" + data );
-            res.status( 200 ).json( { msg: "person-with-name-marry deleted by id with success", data } );
+            res.status( 200 ).json( { msg: "Success request: person-with-name-marry deleted by id with success", data } );
         } )
+
         .catch( ( err ) => {
             res.status( 400 ).json( err );
         } );
@@ -144,7 +145,8 @@ router.get( '/search-by-burritos', ( req, res ) => {
         .sort( { name: 1 } ).limit( 2 ).select( { name: true, favoriteFoods: true } )
         .exec()
         .then( data => {
-            res.status( 200 ).json( { msg: "data searched by burritos with success", data } );
+            res.status( 200 ).json( { msg: "Success request: search-by-burritos", data } );
+
             console.log( 'search-by-burritos' + data )
         } )
         .catch( err => {
@@ -164,7 +166,7 @@ router.post( '/new-person', ( req, res ) => {
     } )
     persone.save()
         .then( ( data ) => {
-            res.status( 200 ).json( "user added with sucess" + data );
+            res.status( 200 ).json( "Success request: new-person" + data );
         } )
         .catch( ( err ) => {
             res.status( 400 ).json( err );
@@ -174,7 +176,7 @@ router.post( '/new-person', ( req, res ) => {
 //delete all person if you want to remove all the persons =>
 router.delete( '/remove-all', ( req, res ) => {
     removeAll( ( err, data ) => {
-        res.status( 200 ).json( "users removed with sucess" + data );
+        res.status( 200 ).json( "Success request: remove-all" + data );
         if ( err ) res.status( 400 ).json( err );
     } );
 } )

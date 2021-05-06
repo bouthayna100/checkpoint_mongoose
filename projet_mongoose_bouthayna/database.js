@@ -8,8 +8,6 @@ mongoose.set( 'useFindAndModify', false );
 mongoose.set( 'useCreateIndex', true );
 
 
-
-
 // mongoose.connect(<Your URI>, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const Database = () => {
@@ -27,7 +25,7 @@ const Database = () => {
 //find all and remove all : optionnel method 
 const searchAll = () => {
   PersonModel.find().then( ( data ) => {
-    console.log( "data all" + data );
+    console.log( "All data in database :" + data );
   } )
     .catch( ( err ) => {
       console.log( err );
@@ -37,7 +35,7 @@ const searchAll = () => {
 const removeAll = (done) => {
   PersonModel.remove( ( err, data ) => {
     if ( err ) throw err;
-    console.log( 'Data delated: ' + data );
+    console.log( 'All Data delated from database: ' + data );
     done(err,data)
   } )
 }
